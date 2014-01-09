@@ -1,7 +1,7 @@
-Dillinger
+Emacs Init
 =========
 
-Windows Emacs Init file
+Windows Emacs Init 
 
   - ESS - 12.09-2
   - Python 3.3 integration
