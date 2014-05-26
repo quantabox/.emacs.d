@@ -6,8 +6,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tsdh-dark)))
- '(custom-safe-themes (quote ("2017cd12f97df7bd0662499236051c476a3abdafe74162d6673b47d42c20b351" "c73c384550e8204077d230edf564b57d77bb0f80803781ca7ba3832aac9a84d8" "9cb4e4dbe7a1c493e2e4e6ea89061108a22e51379a2ec54eac0d728cd0707393" "b6ce34357c18254d3b6e4ce0016a82354b5b05c33512e0824f0e97cae683b517" "e1d44a4d59d71d7255a2a1faff0fc14e70aa4fb32ba60f2847d15c64f89ea361" "be0b542b157adf7ceec6be2309850cc1aaeba2adc7df9b14c4b4d0a472db786d" "62942153554b69395a80cb1053636d23bbb735da5d426f55d1de22cf0be7c8b0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "ec50b1595ed26441febf50077bb0d1385848e4264001b4f387ea078409a4bac4" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(custom-enabled-themes (quote (wombat)))
  '(inhibit-startup-buffer-menu t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
@@ -15,7 +14,7 @@
 ;; If you want to create a file, visit that file with C-x C-f,
 ;; then enter the text in that file's own buffer.
 ;; Monomaniac at w0rk")
- '(virtualenv-root "~/.emacs.d/elpa/jedi-0.1.2/"))
+
 
 '(initial-buffer-choice scratch)
 
@@ -24,7 +23,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ ))
 
 ;; C-x C-j opens dired with the cursor right on the file you're editing
 (require 'dired-x)
@@ -38,15 +37,19 @@
 
 ;; Load File List
 
+;; hide keys
+(add-hook 'comint-output-filter-functions
+      'comint-watch-for-password-prompt)
+
 ;;elpa
 (add-to-list 'load-path (file-name-as-directory
                          (expand-file-name "~/.emacs.d/elpa/")))
 
 ;; ESS
-(load "c:/Users/mohammed.akbar/Document/emacs-24.3/site-lisp/ess-12.09-2/lisp/ess-site")
+(load "~/.emacs.d/ESS/lisp/ess-site")
 
 ;;ipython
-(add-to-list 'load-path "c:/Users/mohammed.akbar/Document/python--3.3.3")
+;;(add-to-list 'load-path "c:/Users/mohammed.akbar/Document/python--3.3.3")
 
 ;;Toolbar and menu bar distract you from learning the key
 ;;bindings (i.e. becoming efficient).
@@ -57,7 +60,6 @@
 ;;Font pickup
 (set-face-attribute 'default nil
                     :family "Consolas" :height 100)
-
 
 ;; ==================================================
 ;;  org mode
@@ -102,7 +104,7 @@
  (setq use-file-dialog nil)
  (setq ess-eval-visibly-p nil) ;otherwise C-c C-r (eval region) takes forever
  (setq ess-ask-for-ess-directory nil) ;otherwise you are prompted each time you start an interactive R session
- (setq inferior-R-program-name "C:/Users/mohammed.akbar/Document/R/R-3.0.2/bin/x64/Rterm.exe")
+ ;;(setq inferior-R-program-name "C:/Users/mohammed.akbar/Document/R/R-3.0.2/bin/x64/Rterm.exe")
 
 ;;; C
 (add-hook 'c-mode-hook
@@ -150,10 +152,10 @@
 (require 'python)
 
 ;; setup ipython for default interpreter
-(setq
- python-shell-interpreter "C:\\Users\\mohammed.akbar\\Document\\Python--3.3.3\\python.exe"
- python-shell-interpreter-args
- "-i C:\\Users\\mohammed.akbar\\Document\\Python--3.3.3\\Scripts\\ipython3-script.py")
+;;(setq
+;; python-shell-interpreter "C:\\Users\\mohammed.akbar\\Document\\Python--3.3.3\\python.exe"
+;; python-shell-interpreter-args
+;; "-i C:\\Users\\mohammed.akbar\\Document\\Python--3.3.3\\Scripts\\ipython3-script.py")
 
 ;; ipy notebook
 ;(require 'ein)
@@ -175,7 +177,24 @@
 (el-get 'sync) 
 
 ;; ==================================================
-;;  virtualenv
+;;  Scala Hooks
 ;; ==================================================
 
-	 
+;;(add-hook 'scala-mode-hook '(lambda ()
+ ;; (require 'whitespace)
+
+  ;; clean-up whitespace at save
+  ;;(make-local-variable 'before-save-hook)
+ ;; (add-hook 'before-save-hook 'whitespace-cleanup)
+
+  ;; turn on highlight. To configure what is highlighted, customize
+  ;; the *whitespace-style* variable. A sane set of things to
+  ;; highlight is: face, tabs, trailing
+;  (whitespace-mode)
+;))
+
+(require 'scala-mode2)
+(require 'ensime)
+(require 'sbt-mode)
+
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
