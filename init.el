@@ -13,7 +13,7 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(initial-scratch-message
-   ";; Monomaniac at w0rk"))
+   ";; Sith"))
 
 ;; autloads
 (if (locate-library "ediff-trees")
