@@ -15,18 +15,35 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("045251e7ff119a8b065b4cb0072067eb2f297acc44a9e36407e6ff165e35c528" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
+    ("2a7beed4f24b15f77160118320123d699282cbf196e0089f113245d4b729ba5d" "045251e7ff119a8b065b4cb0072067eb2f297acc44a9e36407e6ff165e35c528" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
+ '(cygwin-mount-cygwin-bin-directory "C:/Users/AG02628/Documents/cygwin64/bin/")
+ '(cygwin-root-directory "C:/Users/AG02628/Documents/cygwin64/")
  '(inhibit-startup-buffer-menu t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
- '(initial-scratch-message
-   ";; Sith"))
+ '(initial-scratch-message ";; Sith")
+ '(package-selected-packages
+   (quote
+    (el-get anaconda-mode elpy jedi magithub magit-gitflow magit-gh-pulls magit-filenotify ample-zen-theme 0blayout))))
 
-;; autloads
+
+;; ==================================================
+;; autloads ;; check utility in 2018!!
+;; ==================================================
+
 (if (locate-library "ediff-trees")
     (autoload 'ediff-trees "ediff-trees" "Start an tree ediff" t))
 
-;; autcompile
+;; ==================================================
+;; aefault directory:  C-x C- f
+;; ==================================================
+
+(setq default-directory "~/")
+
+;; ==================================================
+;; autcompile init file
+;; ==================================================
+
 ;; (defun autocompile nil
 ;;   "compile itself if ~/.emacs.d/init.el"
 ;;   (interactive)
@@ -50,14 +67,14 @@
 
 
 ;; ==================================================
-;;  Buffer Frame 
+;;  buffer frame 
 ;; ==================================================
 ;;Toolbar and menu bar distract you from learning the key
 ;;bindings (i.e. becoming efficient).
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-
+(toggle-frame-maximized)
 
 ;; ==================================================
 ;;  org mode
@@ -123,28 +140,29 @@
 (require 'python)
 '(python-shell-interpreter "python3")
 
+;; elpy
+(elpy-enable)
+
 ;; ==================================================
 ;;  emacs theme
 ;; ==================================================
 (load-theme 'ample-zen)
 
-;; ==================================================
-;;  graphene
-;; ==================================================
-;; (require 'graphene) ;consider spacemacs
-
 ;; -----------------------------------------------------------------------------
-;; Git support
+;; magit support (not for windows)
 ;; -----------------------------------------------------------------------------
 
-(add-to-list 'load-path "/usr/share/doc/git/contrib/emacs")
-(require 'git)
-(require 'git-blame)
+(global-set-key (kbd "C-x g") 'magit-status) ;; binding C-x g key
 
+;; -----------------------------------------------------------------------------
+;; cygwin support
+;; -----------------------------------------------------------------------------
+
+;;; need to find solution on windows!!!
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 115 :width normal :family "M+ 1mn")))))
+ '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 115 :width normal :family "mplus-1mn-light")))))
