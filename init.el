@@ -92,37 +92,31 @@
           ;;(lambda () (c-set-style "user"))) ; edd or maybe c++ ?
 ;          (lambda () (c-set-style "c++"))) ; edd or maybe c++ ?
 ;;;; ESS
-;(add-hook 'ess-mode-hook
-;          (lambda ()
-;            (ess-set-style 'C++)
-        ;; Because
-            ;;                                 DEF GNU BSD K&R C++
-            ;; ess-indent-level                  2   2   8   5   4
-            ;; ess-continued-statement-offset    2   2   8   5   4
-            ;; ess-brace-offset                  0   0  -8  -5  -4
-            ;; ess-arg-function-offset           2   4   0   0   0
-            ;; ess-expression-offset             4   2   8   5   4
-            ;; ess-else-offset                   0   0   0   0   0
-            ;; ess-close-brace-offset            0   0   0   0   0
-;            (add-hook 'local-write-file-hooks
-;                      (lambda ()
-;                        (ess-nuke-trailing-whitespace)))))
-;; (setq ess-nuke-trailing-whitespace-p t)
+(add-hook 'ess-mode-hook
+         (lambda ()
+           (ess-set-style 'C++)
+        Because
+                                            DEF GNU BSD K&R C++
+            ess-indent-level                  2   2   8   5   4
+            ess-continued-statement-offset    2   2   8   5   4
+            ess-brace-offset                  0   0  -8  -5  -4
+            ess-arg-function-offset           2   4   0   0   0
+            ess-expression-offset             4   2   8   5   4
+            ess-else-offset                   0   0   0   0   0
+            ess-close-brace-offset            0   0   0   0   0
+           (add-hook 'local-write-file-hooks
+                     (lambda ()
+                       (ess-nuke-trailing-whitespace)))))
+(setq ess-nuke-trailing-whitespace-p t)
 
-(require 'ess-site)
-(require 'ess-eldoc)
 
 
 ;; ==================================================
 ;;  Marmalade
 ;; ==================================================
 (require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(package-initialize)
-
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 ;; ==================================================
 ;;  python
