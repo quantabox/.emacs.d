@@ -3,9 +3,7 @@ Emacs Init
 
 Windows Emacs Init 
 
-  - ESS - 12.09-2
-  - Python 3.3 integration
-  - iPy setup - 3.0
-  - emacs build - Ido, Marmalade
-  - el-get
-
+  - ESS 
+  - Elpy Python integration
+  - emacs build - Ido
+  - Cygwin needs to be added for windows!!!
