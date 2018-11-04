@@ -1,6 +1,13 @@
 ;; ==================================================
 ;;  Environment
 ;; ==================================================
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,10 +49,6 @@
 (setq show-paren-style 'expression) ; alternatives are 'parenthesis' and 'mixed'
 
 
-;;elpa
-;(add-to-list 'load-path (file-name-as-directory
-;                         (expand-file-name "~/.emacs.d/elpa/")))
-
 ;; ==================================================
 ;;  Buffer Frame 
 ;; ==================================================
@@ -75,8 +78,6 @@
 (require 'ido)
     (ido-mode t)
     (setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
-
 
 ;; ==================================================
 ;;  EMACS Speaks Statistics
@@ -109,10 +110,8 @@
                        (ess-nuke-trailing-whitespace)))))
 (setq ess-nuke-trailing-whitespace-p t)
 
-
-
 ;; ==================================================
-;;  Marmalade
+;;  ELPA
 ;; ==================================================
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
