@@ -24,7 +24,7 @@
  '(initial-scratch-message ";; Sith")
  '(package-selected-packages
    (quote
-    (el-get anaconda-mode elpy jedi magithub magit-gitflow magit-gh-pulls magit-filenotify ample-zen-theme 0blayout))))
+    (egg gh-md flymd ess ess-R-data-view el-get anaconda-mode elpy jedi magithub magit-gitflow magit-gh-pulls magit-filenotify ample-zen-theme 0blayout))))
 
 
 ;; ==================================================
@@ -154,11 +154,6 @@
 
 (global-set-key (kbd "C-x g") 'magit-status) ;; binding C-x g key
 
-;; -----------------------------------------------------------------------------
-;; cygwin support
-;; -----------------------------------------------------------------------------
-
-;;; need to find solution on windows!!!
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
