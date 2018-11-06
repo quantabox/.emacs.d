@@ -49,4 +49,5 @@ MIT
    [magit]: <https://magit.vc/>
    [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
    [express]: <http://expressjs.com>
-   []: <http://angularjs.org>
+   [doom]: <https://github.com/hlissner/doom-emacs>
+
