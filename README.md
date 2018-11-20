@@ -20,6 +20,7 @@ Get cygwin! - native shell/bash control is considerably better than any of the o
 
 # Emacs Essentials!
 We will need all of these - *[ESS][ess], [Elpy][elpy], ido, [ample-zen][amplezen], [magit][magit], font:  [Mplus]([mplus])* 
+Moving to Doom [doom]
 
 ### Todos
 

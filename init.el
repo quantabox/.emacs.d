@@ -6,6 +6,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(server-start) ;; to shut Emacs down completely, call the command `(kill-emacs)’.
 (package-initialize)
 
 (custom-set-variables
@@ -15,16 +16,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("2a7beed4f24b15f77160118320123d699282cbf196e0089f113245d4b729ba5d" "045251e7ff119a8b065b4cb0072067eb2f297acc44a9e36407e6ff165e35c528" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
- '(cygwin-mount-cygwin-bin-directory "C:/Users/AG02628/Documents/cygwin64/bin/")
- '(cygwin-root-directory "C:/Users/AG02628/Documents/cygwin64/")
+    ("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6ebdb33507c7db94b28d7787f802f38ac8d2b8cd08506797b3af6cdfd80632e0" "2a7beed4f24b15f77160118320123d699282cbf196e0089f113245d4b729ba5d" "045251e7ff119a8b065b4cb0072067eb2f297acc44a9e36407e6ff165e35c528" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
  '(inhibit-startup-buffer-menu t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(initial-scratch-message ";; Sith")
  '(package-selected-packages
    (quote
-    (egg gh-md flymd ess ess-R-data-view el-get anaconda-mode elpy jedi magithub magit-gitflow magit-gh-pulls magit-filenotify ample-zen-theme 0blayout))))
+    (edbi edbi-sqlite emacsql emacsql-psql emacsql-sqlite esqlite doom-modeline doom-themes egg gh-md flymd ess ess-R-data-view el-get anaconda-mode elpy jedi magithub magit-gitflow magit-gh-pulls magit-filenotify ample-zen-theme 0blayout))))
 
 
 ;; ==================================================
@@ -33,9 +32,10 @@
 
 (if (locate-library "ediff-trees")
     (autoload 'ediff-trees "ediff-trees" "Start an tree ediff" t))
+(setq backup-directory-alist '(("*.*" . "~/.Trash")))  ;; send backups to .Trash
 
 ;; ==================================================
-;; aefault directory:  C-x C- f
+;; Default directory:  C-x C- f
 ;; ==================================================
 
 (setq default-directory "~/")
@@ -71,9 +71,9 @@
 ;; ==================================================
 ;;Toolbar and menu bar distract you from learning the key
 ;;bindings (i.e. becoming efficient).
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(scroll-bar-mode 0)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 (toggle-frame-maximized)
 
 ;; ==================================================
@@ -143,10 +143,71 @@
 ;; elpy
 (elpy-enable)
 
+
+;; ==================================================
+;;  projectile mode 
+;; ==================================================
+
+(setq projectile-mode-line " Projectile")`
+(projectile-mode +1)
+
+
 ;; ==================================================
 ;;  emacs theme
 ;; ==================================================
-(load-theme 'ample-zen)
+(require 'doom-themes)
+
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+;; may have their own settings.
+(load-theme 'doom-one t)
+
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+
+;; Enable custom neotree theme (all-the-icons must be installed!)
+(doom-themes-neotree-config)
+;; or for treemacs users
+(doom-themes-treemacs-config)
+
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
+
+;; ==================================================
+;;  doom-modeline
+;; ==================================================
+
+(require 'doom-modeline)
+(doom-modeline-init)
+
+;; How tall the mode-line should be (only respected in GUI Emacs).
+(setq doom-modeline-height 25)
+
+;; How wide the mode-line bar should be (only respected in GUI Emacs).
+(setq doom-modeline-bar-width 3)
+
+;; Determines the style used by `doom-modeline-buffer-file-name'.
+;; If you are expereicing the laggy issue, especially while editing remote files
+;; with tramp, please use `file-name', `truncate-all' or `truncate-upto-root'
+;; style.
+;; Please refer to https://github.com/bbatsov/projectile/issues/657.
+(setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+
+;; What executable of Python will be used (if nil nothing will be showed).
+(setq doom-modeline-python-executable "python")
+
+;; Whether show `all-the-icons' or not (if nil nothing will be showed).
+;; The icons may not be showed correctly on Windows. Disable to make it work.
+(setq doom-modeline-icon t)
+(set-fontset-font "fontset-default" '(#xf000 . #xf23a) "FontAwesome")
+
+;; Don’t compact font caches during GC.
+;; If you are expereicing the laggy issue especially on Windows, please set to
+;; non-nil.
+(setq inhibit-compacting-font-caches t)
 
 ;; -----------------------------------------------------------------------------
 ;; magit support (not for windows)
@@ -155,10 +216,15 @@
 (global-set-key (kbd "C-x g") 'magit-status) ;; binding C-x g key
 
 
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 115 :width normal :family "mplus-1m-light")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 115 :width normal :family "mplus-1mn-light")))))
-0987
+ )
